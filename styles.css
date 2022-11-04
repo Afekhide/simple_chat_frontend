@@ -1,0 +1,140 @@
+
+
+:root{
+    --starlight: #f2f2f2;
+    --light-grey: #a6a6a6;
+    --faint-black: #404040;
+    --deep-black: #262626;
+    --heavy-black: #0d0d0d;
+    --block-padding: 2rem;
+}
+
+*{
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--deep-black);
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #eee;
+    min-height: 100vh;
+    display: grid;
+    background-color: var(--starlight);
+
+}
+
+.wrapper{
+    min-height: 100vh;
+    display: grid;
+    position: relative;
+    margin: 0 var(--block-padding);
+    grid-template-rows: max-content 1fr max-content;
+    
+}
+/*Header Section*/
+
+.header{
+    padding: 2rem 0;
+}
+
+.header__heading{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--heavy-black);
+    text-decoration: underline;
+    text-align: center;
+}
+
+
+
+/*Chats Section*/
+
+.chats__container{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.chats__chat{
+    padding: 1rem 0;
+    border-top: 0.5px dashed var(--faint-black);
+    border-bottom: 0.5px dashed;
+}
+
+.chat__text{
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--deep-black);
+}
+
+.chat__date{
+    opacity: 0.7;
+    font-size: 0.8rem;
+    display: block;
+    font-weight: 500;
+    padding-bottom: 0.8rem;
+}
+
+
+/*Message Input Section*/
+.input{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.input__container{
+    display: flex;
+    margin: 2rem 0;
+    padding: 0 1rem;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #a9a9a9;
+}
+
+input{
+    padding: 1rem 1rem;
+    outline: 0;
+    border: 0;
+    font-weight: 400;
+    font-size: 1rem;
+    flex-grow: 1;
+    background-color: transparent;
+    
+}
+
+input::placeholder{
+    color: #a9a9a9;
+}
+
+.sendIcon{
+    width: 2rem;
+    height: auto;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+
+/*Media Queries*/
+@media screen and (min-width: 768px) {
+    .wrapper{
+        margin: 0 12rem;
+    }
+
+    .chat__date{
+        font-size: 0.8rem;
+    }
+
+    .chat__text{
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .wrapper{
+        margin: 0 20rem;
+    }
+}
