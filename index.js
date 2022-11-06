@@ -29,7 +29,7 @@ socket.on('fetchMessages', credentials => {
     const {data, error} = await _supabase.from('message').select('*, author:author(username)');
     console.log(data);
     if (error) {console.log('failed to load messages'); return}
-    data.map(message => appendChat({name:message.author.username, text:message.text, date:message.created_at}))
+    data.map(message => appendChat({name:message.author.username, text:message.text, date:new Date(message.created_at).toLocaleString()}))
   })()
 })
 
