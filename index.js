@@ -1,5 +1,6 @@
 const socket = io('https://smchat.up.railway.app/');
 //const socket = io('ws://localhost:4000/');
+let _supabase = null;
 
 if(!window.sessionStorage.getItem('username'))
     window.sessionStorage.setItem('username', window.prompt('Please enter your name!'));
@@ -18,6 +19,18 @@ socket.on('disconnect', () => {
 
 socket.on('message', message => {
   appendChat(JSON.parse(message));
+})
+
+socket.on('fetchMessages', credentials => {
+  let {db_url, db_key} = (credentials);
+  _supabase = supabase.createClient(db_url, db_key);
+
+  (async function(){
+    const {data, error} = await _supabase.from('message').select('*, author:author(username)');
+    console.log(data);
+    if (error) {console.log('failed to load messages'); return}
+    data.map(message => appendChat({name:message.author.username, text:message.text, date:message.created_at}))
+  })()
 })
 
 
@@ -64,7 +77,10 @@ function sendMessage(){
 
 let input__field = document.querySelector('input');
 let send__icon = document.querySelector('.sendIcon');
+
 send__icon.addEventListener('click', sendMessage)
-input__field.addEventListener('keyup', ev => {
-  if (ev.key == 'Enter') sendMessage();
+input__field.addEventListener('keyup', event => {
+  if (event.key == 'Enter') sendMessage();
 })
+
+
